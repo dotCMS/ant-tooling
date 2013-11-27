@@ -1,8 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
+group = 'com.dotcms'
 sourceCompatibility = '1.6'
-version = '0.1'
+version = '1.0'
 
 repositories {
     mavenCentral()
@@ -12,4 +14,16 @@ dependencies {
     compile 'org.apache.ant:ant:1.9.2'
     compile 'log4j:log4j:1.2.16'
     compile 'commons-lang:commons-lang:2.4'
+}
+
+
+// command to upload it: gradle -PrepoUser=<your user name> -PrepoPass=<yourpassword>  uploadArchives
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url:'http://repo.dotcms.com/artifactory/libs-release-local') {
+                authentication(userName: repoUser, password: repoPass)
+            }
+        }
+    }
 }
