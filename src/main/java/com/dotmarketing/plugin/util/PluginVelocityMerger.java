@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.dotmarketing.util.Logger;
+import org.apache.log4j.Logger;
 
 public class PluginVelocityMerger {
+	public static Logger logger = Logger.getLogger(PluginVelocityMerger.class);
 
 	public static String[] overrideFiles = {
 			"WEB-INF" + File.separator + "velocity" + File.separator
@@ -123,8 +123,7 @@ public class PluginVelocityMerger {
 							+ pluginName, fragment);
 			return buf;
 		} catch (IOException e) {
-			Logger.debug(PluginVelocityMerger.class, "IOException: "
-					+ e.getMessage(), e);
+			logger.debug("IOException: " + e.getMessage(), e);
 		}
 		return null;
 	}
