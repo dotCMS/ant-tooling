@@ -7,7 +7,9 @@ sourceCompatibility = '1.6'
 version = '1.0'
 
 repositories {
-    mavenCentral()
+    maven {
+        url "http://repo.dotcms.com/artifactory/libs-release"
+    }
 }
 
 dependencies {
