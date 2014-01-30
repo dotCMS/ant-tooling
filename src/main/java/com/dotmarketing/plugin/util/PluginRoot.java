@@ -1,17 +1,13 @@
 package com.dotmarketing.plugin.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import org.apache.commons.lang.SystemUtils;
+import org.apache.log4j.Logger;
+
+import java.io.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
 
 /**
  * This plugin will allow any file to be overridden or added.
@@ -40,13 +36,15 @@ public class PluginRoot {
 
     private String rootPath;
     private String pluginsPath;
+    private boolean forWar;
     private String backUpPath;
     private Collection<File> plugins;
 
-    public PluginRoot ( String rootPath, String pluginsPath ) {
+    public PluginRoot ( String rootPath, String pluginsPath, boolean forWar ) {
 
         setRootPath( rootPath );
         setPluginsPath( pluginsPath );
+        setForWar( forWar );
 
         Boolean canContinue = false;
 
@@ -349,6 +347,11 @@ public class PluginRoot {
      * @return
      */
     public String getAbsolutePath ( String path ) {
+
+        if ( isForWar() ) {
+            return getRootPath() + File.separator + path;
+        }
+
         File parentFolder = new File( getRootPath() );
         return parentFolder.getParent() + File.separator + path;
     }
@@ -378,6 +381,19 @@ public class PluginRoot {
 
     private void setRootPath ( String rootPath ) {
         this.rootPath = rootPath;
+    }
+
+    /**
+     * Specifies if this plugin will work inside or not a war structure
+     *
+     * @param forWar True if it will run on a war structure
+     */
+    public void setForWar ( boolean forWar ) {
+        this.forWar = forWar;
+    }
+
+    public boolean isForWar () {
+        return forWar;
     }
 
     public String getPluginsPath () {

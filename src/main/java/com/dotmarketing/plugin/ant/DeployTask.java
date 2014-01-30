@@ -17,6 +17,7 @@ public class DeployTask extends Task {
 
     private String root;
     private String plugins;
+    private boolean forWar;
 
     @Override
     public void execute () throws BuildException {
@@ -26,7 +27,7 @@ public class DeployTask extends Task {
         if ( !logRoot.getAllAppenders().hasMoreElements() ) {
             logRoot.addAppender( new ConsoleAppender( new PatternLayout( "%m%n" ) ) );
         }
-        new PluginRoot( root, plugins ).deploy();//Plugin that will allow any file to be overridden or added.
+        new PluginRoot( root, plugins, forWar ).deploy();//Plugin that will allow any file to be overridden or added.
         new PluginFileMerger().mergePlugins( root, plugins );
     }
 
@@ -46,6 +47,15 @@ public class DeployTask extends Task {
      */
     public synchronized void setPlugins ( String plugins ) {
         this.plugins = plugins;
+    }
+
+    /**
+     * Specifies if this plugin will work inside or not a war structure
+     *
+     * @param forWar True if it will run on a war structure
+     */
+    public void setForWar ( boolean forWar ) {
+        this.forWar = forWar;
     }
 
 }
