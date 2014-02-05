@@ -54,9 +54,10 @@ public class PluginFileMerger {
 
 		}
 
-		logger.debug("Deleting files from WEB-INF/classes");
+        //TODO: Are we sure about this??
+		/*logger.debug("Deleting files from WEB-INF/classes");
 		File classesDir = new File(rootPath + File.separator + "WEB-INF" + File.separator + "classes" + File.separator);
-		deleteRecursive(classesDir);
+		deleteRecursive(classesDir);*/
 	}
 
 	private static void deleteRecursive(File dir){

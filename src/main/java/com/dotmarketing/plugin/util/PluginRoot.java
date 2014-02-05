@@ -34,17 +34,17 @@ public class PluginRoot {
     public static String ROOT_FOLDER = "ROOT";
     public static String BACKUP_FOLDER = "_original";
 
-    private String rootPath;
+    private String distributionPath;
+    private String dotcmsHome;
     private String pluginsPath;
-    private boolean forWar;
     private String backUpPath;
     private Collection<File> plugins;
 
-    public PluginRoot ( String rootPath, String pluginsPath, boolean forWar ) {
+    public PluginRoot ( String distributionPath, String dotcmsHome, String pluginsPath ) {
 
-        setRootPath( rootPath );
+        setDistributionPath( distributionPath );
+        setDotcmsHome( dotcmsHome );
         setPluginsPath( pluginsPath );
-        setForWar( forWar );
 
         Boolean canContinue = false;
 
@@ -64,7 +64,7 @@ public class PluginRoot {
 
         if ( canContinue ) {
             //Getting all the current plugins
-            setPlugins( PluginUtil.getPluginJars( rootPath, pluginsPath ) );
+            setPlugins( PluginUtil.getPluginJars( getDotcmsHome(), pluginsPath ) );
         }
     }
 
@@ -124,7 +124,7 @@ public class PluginRoot {
         for ( String rootFilePath : rootFilesPaths ) {
 
             //Getting the relative path based on the ROOT path, ie: ROOT/tomcat/conf/server.xml --> tomcat/conf/server.xml
-            String relativeFilePath = rootFilePath.replace( ROOT_FOLDER + "/", "" );//ZIP/JAR ENTRY FILES MUST HAVE '/' AS SEPARATOR ON ANY PLATFORM
+            String relativeFilePath = rootFilePath.replaceFirst( ROOT_FOLDER + "/", "" );//ZIP/JAR ENTRY FILES MUST HAVE '/' AS SEPARATOR ON ANY PLATFORM
             File backUpFile = new File( getAbsoluteBackUpPath( relativeFilePath ) );//The possible back-up path for this file
             File originalFile = new File( getAbsolutePath( relativeFilePath ) );//The path of the original file to be override/add it
 
@@ -347,13 +347,7 @@ public class PluginRoot {
      * @return
      */
     public String getAbsolutePath ( String path ) {
-
-        if ( isForWar() ) {
-            return getRootPath() + File.separator + path;
-        }
-
-        File parentFolder = new File( getRootPath() );
-        return parentFolder.getParent() + File.separator + path;
+        return getDistributionPath() + File.separator + path;
     }
 
     /**
@@ -375,25 +369,20 @@ public class PluginRoot {
         return getAbsolutePath( BACKUP_FOLDER );
     }
 
-    public String getRootPath () {
-        return rootPath;
+    public String getDistributionPath () {
+        return distributionPath;
     }
 
-    private void setRootPath ( String rootPath ) {
-        this.rootPath = rootPath;
+    public void setDistributionPath ( String distributionPath ) {
+        this.distributionPath = distributionPath;
     }
 
-    /**
-     * Specifies if this plugin will work inside or not a war structure
-     *
-     * @param forWar True if it will run on a war structure
-     */
-    public void setForWar ( boolean forWar ) {
-        this.forWar = forWar;
+    public String getDotcmsHome () {
+        return dotcmsHome;
     }
 
-    public boolean isForWar () {
-        return forWar;
+    public void setDotcmsHome ( String dotcmsHome ) {
+        this.dotcmsHome = dotcmsHome;
     }
 
     public String getPluginsPath () {
