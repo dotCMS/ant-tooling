@@ -54,11 +54,10 @@ public class PluginFileMerger {
 
 		}
 
-        //TODO: Are we sure about this??
-		/*logger.debug("Deleting files from WEB-INF/classes");
-		File classesDir = new File(rootPath + File.separator + "WEB-INF" + File.separator + "classes" + File.separator);
-		deleteRecursive(classesDir);*/
-	}
+        logger.debug( "Deleting files from WEB-INF/classes" );
+        File classesDir = new File( rootPath + File.separator + "WEB-INF" + File.separator + "classes" + File.separator );
+        deleteRecursive( classesDir );
+    }
 
 	private static void deleteRecursive(File dir){
 		File[] files = dir.listFiles();
@@ -602,6 +601,13 @@ public class PluginFileMerger {
 				+ "classes" + File.separator + "dotmarketing-config.properties"), "## BEGIN PLUGINS",
 				"## END PLUGINS", "## BEGIN PLUGIN:" + name, "## END PLUGIN:"
 						+ name, dotmarketing, "#", "## OVERRIDE:" + name);
+
+        String dotClusterConf = PluginUtil.getTextData(
+                "conf/dotcms-config-cluster-ext.properties", jar );
+        merge( new File( rootPath + File.separator + "WEB-INF" + File.separator
+                + "classes" + File.separator + "dotcms-config-cluster.properties" ), "## BEGIN PLUGINS",
+                "## END PLUGINS", "## BEGIN PLUGIN:" + name, "## END PLUGIN:"
+                + name, dotClusterConf, "#", "## OVERRIDE:" + name );
 
 		//Merging plugin language files
 		mergeLanguageFiles(jar);
