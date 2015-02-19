@@ -1,31 +1,27 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
 
-group = 'com.dotcms'
-sourceCompatibility = '1.6'
-version = '1.0'
+sourceCompatibility = '1.7'
+version = '1.1'
 
 repositories {
-    maven {
-        url "http://repo.dotcms.com/artifactory/libs-release"
-    }
+    maven {url "http://repo.dotcms.com/artifactory/libs-release"}
 }
 
 dependencies {
     compile 'org.apache.ant:ant:1.9.2'
-    compile 'log4j:log4j:1.2.16'
-    compile 'commons-lang:commons-lang:2.4'
+    compile group: 'com.dotcms.lib', name: 'dot.tika-app', version:'1.3_1'
+    compile group: 'com.dotcms.lib', name: 'dot.commons-lang', version:'2.4_1'
 }
 
-
-// command to upload it: gradle -PrepoUser=<your user name> -PrepoPass=<yourpassword>  uploadArchives
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url:'http://repo.dotcms.com/artifactory/libs-release-local') {
-                authentication(userName: repoUser, password: repoPass)
-            }
-        }
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'dotCMS ant tooling',
+                'Implementation-Version': version,
+                'Implementation-Vendor': 'dotCMS'
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.8'
 }

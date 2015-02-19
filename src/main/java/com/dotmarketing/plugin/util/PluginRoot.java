@@ -1,7 +1,7 @@
 package com.dotmarketing.plugin.util;
 
-import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.commons.lang.SystemUtils;
+import com.dotcms.repackage.org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.Arrays;

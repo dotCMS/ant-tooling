@@ -1,10 +1,10 @@
 package com.dotmarketing.plugin.ant;
 
+import com.dotcms.repackage.org.apache.log4j.ConsoleAppender;
+import com.dotcms.repackage.org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.log4j.PatternLayout;
 import com.dotmarketing.plugin.util.PluginFileMerger;
 import com.dotmarketing.plugin.util.PluginRoot;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 

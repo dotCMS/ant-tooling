@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.log4j.Logger;
 import org.apache.tools.ant.BuildException;
 
 public class PluginFileMerger {
@@ -415,21 +415,23 @@ public class PluginFileMerger {
 			deleteDirectory(new File(jspDest));
 			deleteFiles(libDest,"pluginlib-"+name+"-",".jar");
 
-			//Look for any TinyMCE plugins
-			String tinyMCEDest = rootPath + File.separator + "html" + File.separator  + "js" + File.separator  + "tinymce" + File.separator +   "jscripts" + File.separator  + "tiny_mce" + File.separator  +  File.separator
-			+ "plugins" + File.separator;
-			final String prefix= "plugin_"+name+"_";
-			FileFilter filter=new FileFilter() {
+            //Look for any TinyMCE plugins
+            String tinyMCEDest = rootPath + File.separator + "html" +
+                    File.separator + "js" + File.separator + "tinymce" +
+                    File.separator + "js" + File.separator + "tinymce" +
+                    File.separator + "plugins" + File.separator;
+            final String prefix = "plugin_" + name + "_";
+            FileFilter filter = new FileFilter() {
 
-				public boolean accept(File pathname) {
-					if (pathname.getName().startsWith(prefix)) {
-						return true;
-					}
-					return false;
-				}
+                public boolean accept ( File pathname ) {
+                    if ( pathname.getName().startsWith( prefix ) ) {
+                        return true;
+                    }
+                    return false;
+                }
 
-			};
-			File tinyMCEDir=new File(tinyMCEDest);
+            };
+            File tinyMCEDir=new File(tinyMCEDest);
 			File[] tinyMCEPlugins=tinyMCEDir.listFiles(filter);
 			for (File tinyMCEPlugin :tinyMCEPlugins ) {
 				deleteDirectory(tinyMCEPlugin);
@@ -672,8 +674,12 @@ public class PluginFileMerger {
 		logger.info("The lib directry is " + libDest);
 		String jspDest = rootPath + File.separator + "html" + File.separator + "plugins" + File.separator
 				+ name;
-		String tinyMCEDest = rootPath + File.separator + "html" + File.separator  + "js" + File.separator  + "tinymce" + File.separator +   "jscripts" + File.separator  + "tiny_mce" + File.separator  +  File.separator
-		+ "plugins" + File.separator;
+
+        String tinyMCEDest = rootPath + File.separator + "html" +
+                File.separator + "js" + File.separator + "tinymce" +
+                File.separator + "js" + File.separator + "tinymce" +
+                File.separator + "plugins" + File.separator;
+
 		String classDest=rootPath + File.separator + "WEB-INF" + File.separator + "classes" + File.separator;
 		Enumeration<JarEntry> e = jar.entries();
 		while (e.hasMoreElements()) {
