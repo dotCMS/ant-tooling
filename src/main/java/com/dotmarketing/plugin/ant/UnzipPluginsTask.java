@@ -15,9 +15,9 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import com.dotcms.repackage.org.apache.log4j.ConsoleAppender;
+import com.dotcms.repackage.org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.log4j.PatternLayout;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
