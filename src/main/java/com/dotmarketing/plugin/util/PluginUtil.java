@@ -20,7 +20,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.dotcms.repackage.org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.logging.log4j.LogManager;
+import com.dotcms.repackage.org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -29,7 +30,7 @@ import org.xml.sax.SAXException;
 
 public class PluginUtil {
 
-	public static Logger logger = Logger.getLogger(PluginUtil.class);
+	public static Logger logger = LogManager.getLogger(PluginUtil.class);
 	
 	public static final String SYSTEM_PLUGIN_ORDER_KEY = "pluginOrderKey";
 

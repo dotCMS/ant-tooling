@@ -27,13 +27,14 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import com.dotcms.repackage.org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.logging.log4j.LogManager;
+import com.dotcms.repackage.org.apache.logging.log4j.Logger;
 import org.apache.tools.ant.BuildException;
 
 public class PluginFileMerger {
 	String rootPath;
 	private String name;
-	private static Logger logger=Logger.getLogger(PluginFileMerger.class);
+	private static Logger logger= LogManager.getLogger(PluginFileMerger.class);
 	boolean deployAppClassLoader = false;
 
 	public PluginFileMerger () {

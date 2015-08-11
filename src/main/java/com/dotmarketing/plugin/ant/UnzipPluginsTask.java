@@ -1,11 +1,11 @@
 package com.dotmarketing.plugin.ant;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.dotmarketing.plugin.util.Log4jUtil;
+import com.dotmarketing.plugin.util.PluginUtil;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Task;
+
+import java.io.*;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -14,14 +14,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-
-import com.dotcms.repackage.org.apache.log4j.ConsoleAppender;
-import com.dotcms.repackage.org.apache.log4j.Logger;
-import com.dotcms.repackage.org.apache.log4j.PatternLayout;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
-
-import com.dotmarketing.plugin.util.PluginUtil;
 
 /**
  * This task will unzip the plugins in the correct order into the directory that gets used to build the bundle plugin for war distribution.
@@ -74,10 +66,12 @@ public class UnzipPluginsTask  extends Task {
 	}
 	
 	public static void main (String[] args) {
-		Logger logRoot = Logger.getRootLogger();
-		if (!logRoot.getAllAppenders().hasMoreElements()) {
-			logRoot.addAppender(new ConsoleAppender(   new PatternLayout("%m%n")));
-		}
+
+		//TODO: Remove!!!
+		//Create and add a new ConsoleAppender to the log4j configuration
+		//Log4jUtil.createAndAddConsoleAppender();
+		//TODO: Remove!!!
+
 		UnzipPluginsTask task=new UnzipPluginsTask();
 		task.setRootPath(args[0]);
 		task.setPluginPath(args[1]);
@@ -88,11 +82,12 @@ public class UnzipPluginsTask  extends Task {
 	
 	@Override
 	public void execute() throws BuildException {
-		//Init log4j to see the messages in ant's output
-		Logger logRoot = Logger.getRootLogger();
-		if (!logRoot.getAllAppenders().hasMoreElements()) {
-			logRoot.addAppender(new ConsoleAppender(   new PatternLayout("%m%n")));
-		}
+
+		//TODO: Remove!!!
+		//Create and add a new ConsoleAppender to the log4j configuration
+		//Log4jUtil.createAndAddConsoleAppender();
+		//TODO: Remove!!!
+
 		File destFile=new File(destination);
 		List<File> plugins = PluginUtil.getPluginJars(rootPath, pluginPath);
 		for (File plugin : plugins) {
