@@ -1,6 +1,5 @@
 package com.dotmarketing.plugin.ant;
 
-import com.dotmarketing.plugin.util.Log4jUtil;
 import com.dotmarketing.plugin.util.PluginUtil;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
@@ -67,11 +66,6 @@ public class UnzipPluginsTask  extends Task {
 	
 	public static void main (String[] args) {
 
-		//TODO: Remove!!!
-		//Create and add a new ConsoleAppender to the log4j configuration
-		//Log4jUtil.createAndAddConsoleAppender();
-		//TODO: Remove!!!
-
 		UnzipPluginsTask task=new UnzipPluginsTask();
 		task.setRootPath(args[0]);
 		task.setPluginPath(args[1]);
@@ -82,11 +76,6 @@ public class UnzipPluginsTask  extends Task {
 	
 	@Override
 	public void execute() throws BuildException {
-
-		//TODO: Remove!!!
-		//Create and add a new ConsoleAppender to the log4j configuration
-		//Log4jUtil.createAndAddConsoleAppender();
-		//TODO: Remove!!!
 
 		File destFile=new File(destination);
 		List<File> plugins = PluginUtil.getPluginJars(rootPath, pluginPath);

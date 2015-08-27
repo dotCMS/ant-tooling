@@ -1,6 +1,5 @@
 package com.dotmarketing.plugin.ant;
 
-import com.dotmarketing.plugin.util.Log4jUtil;
 import com.dotmarketing.plugin.util.PluginFileMerger;
 import com.dotmarketing.plugin.util.PluginRoot;
 import org.apache.tools.ant.BuildException;
@@ -21,15 +20,6 @@ public class DeployTask extends Task {
 
     @Override
     public void execute () throws BuildException {
-
-        //TODO: Remove!!!
-        Log4jUtil.initialize();
-//        Log4jUtil.test();
-//        Log4jUtil.test1();
-
-        //Create and add a new ConsoleAppender to the log4j configuration
-//        Log4jUtil.createAndAddConsoleAppender();
-        //TODO: Remove!!!
 
         new PluginRoot( distributionPath, dotcmsHome, plugins ).deploy();//Plugin that will allow any file to be overridden or added.
         new PluginFileMerger().mergePlugins( dotcmsHome, plugins );

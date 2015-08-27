@@ -198,7 +198,7 @@ public class PluginFileMerger {
 					+ file.getAbsolutePath());
 			return true;
 		}
-		logger.error("Merging file: " + file.getAbsolutePath());
+		logger.info("Merging file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = merge(input, targetCommentBegin, targetCommentEnd,
 				startComment, endComment, mergeText, comment, overrideBegin);
