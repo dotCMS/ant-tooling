@@ -1,7 +1,8 @@
 package com.dotmarketing.plugin.util;
 
 import com.dotcms.repackage.org.apache.commons.lang.SystemUtils;
-import com.dotcms.repackage.org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.logging.log4j.LogManager;
+import com.dotcms.repackage.org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.util.Arrays;
@@ -27,7 +28,7 @@ import java.util.jar.JarFile;
  */
 public class PluginRoot {
 
-    private static Logger logger = Logger.getLogger( PluginRoot.class );
+    private static Logger logger = LogManager.getLogger(PluginRoot.class);
 
     private String[] executableFiles = new String[]{"sh", "bat", "exe"};
 

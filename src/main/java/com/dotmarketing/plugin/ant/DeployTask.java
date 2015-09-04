@@ -1,12 +1,11 @@
 package com.dotmarketing.plugin.ant;
 
-import com.dotcms.repackage.org.apache.log4j.ConsoleAppender;
-import com.dotcms.repackage.org.apache.log4j.Logger;
-import com.dotcms.repackage.org.apache.log4j.PatternLayout;
 import com.dotmarketing.plugin.util.PluginFileMerger;
 import com.dotmarketing.plugin.util.PluginRoot;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+
+import java.net.URL;
 
 
 /**
@@ -22,11 +21,6 @@ public class DeployTask extends Task {
     @Override
     public void execute () throws BuildException {
 
-        //Init log4j to see the messages in ant's output
-        Logger logRoot = Logger.getRootLogger();
-        if ( !logRoot.getAllAppenders().hasMoreElements() ) {
-            logRoot.addAppender( new ConsoleAppender( new PatternLayout( "%m%n" ) ) );
-        }
         new PluginRoot( distributionPath, dotcmsHome, plugins ).deploy();//Plugin that will allow any file to be overridden or added.
         new PluginFileMerger().mergePlugins( dotcmsHome, plugins );
     }

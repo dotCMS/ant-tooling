@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.apache.ant:ant:1.9.2'
-    compile group: 'com.dotcms.lib', name: 'dot.tika-app', version:'1.3_1'
-    compile group: 'com.dotcms.lib', name: 'dot.commons-lang', version:'2.4_1'
+    compile (group: 'com.dotcms', name: 'dotcms', version: '3.2.3'){
+        transitive = true
+    }
 }
 
 jar {

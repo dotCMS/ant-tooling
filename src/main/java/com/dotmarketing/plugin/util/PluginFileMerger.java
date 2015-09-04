@@ -27,13 +27,14 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import com.dotcms.repackage.org.apache.log4j.Logger;
+import com.dotcms.repackage.org.apache.logging.log4j.LogManager;
+import com.dotcms.repackage.org.apache.logging.log4j.Logger;
 import org.apache.tools.ant.BuildException;
 
 public class PluginFileMerger {
 	String rootPath;
 	private String name;
-	private static Logger logger=Logger.getLogger(PluginFileMerger.class);
+	private static Logger logger= LogManager.getLogger(PluginFileMerger.class);
 	boolean deployAppClassLoader = false;
 
 	public PluginFileMerger () {
@@ -197,7 +198,7 @@ public class PluginFileMerger {
 					+ file.getAbsolutePath());
 			return true;
 		}
-		logger.error("Merging file: " + file.getAbsolutePath());
+		logger.info("Merging file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = merge(input, targetCommentBegin, targetCommentEnd,
 				startComment, endComment, mergeText, comment, overrideBegin);
