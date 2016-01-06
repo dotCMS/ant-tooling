@@ -119,7 +119,7 @@ public class PluginFileMerger {
 					+ file.getAbsolutePath());
 			return true;
 		}
-		logger.error("Merging file: " + file.getAbsolutePath());
+		logger.info("Merging file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = merge(input, targetCommentBegin, targetCommentEnd,
 				startComment, endComment, mergeText);
@@ -145,7 +145,7 @@ public class PluginFileMerger {
 					+ file.getAbsolutePath());
 			return true;
 		}
-		logger.error("Merging file: " + file.getAbsolutePath());
+		logger.info("Merging file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = mergeByKey(input, targetCommentBegin, targetCommentEnd,
 				startComment, endComment, mergeText, overrides, overrideBegin,
@@ -172,7 +172,7 @@ public class PluginFileMerger {
 					+ file.getAbsolutePath());
 			return true;
 		}
-		logger.error("Merging file: " + file.getAbsolutePath());
+		logger.info("Merging file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = mergeByAttribute(input, targetCommentBegin,
 				targetCommentEnd, startComment, endComment, mergeText,
@@ -1569,7 +1569,7 @@ public class PluginFileMerger {
 			return false;
 		}
 
-		logger.error("Cleaning file: " + file.getAbsolutePath());
+		logger.info("Cleaning file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = removeFragmentXML(input, startComment, endComment,
 				beginOverride, endOverride);
@@ -1590,7 +1590,7 @@ public class PluginFileMerger {
 			return false;
 		}
 
-		logger.error("Cleaning file: " + file.getAbsolutePath());
+		logger.info("Cleaning file: " + file.getAbsolutePath());
 		InputStream input = new FileInputStream(file);
 		String buf = removePropertiesFragment(input, startComment, endComment,
 				beginOverride, endOverride);
