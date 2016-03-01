@@ -1074,7 +1074,7 @@ public class PluginFileMerger {
                 if (!isContinued) {
                     int index = trim.indexOf("=");
                     if (index > 0) {
-                        String propName = trim.substring(0, index);
+                        String propName = trim.substring(0, index).trim();
                         props.add(propName);
 
                         // Is the property value continued on the next line?
@@ -1107,7 +1107,7 @@ public class PluginFileMerger {
 			}
 			int index = trim.indexOf("=");
 			if ((!inPlugins) && index > 0
-					&& props.contains(trim.substring(0, index))) {
+					&& props.contains(trim.substring(0, index).trim())) {
 				buf.append(overrideBegin);
 				buf.append("\n");
 				buf.append(comment);
