@@ -1052,7 +1052,6 @@ public class PluginFileMerger {
 	 * @param mergeText
 	 * @param comment
 	 * @param overrideBegin
-	 * @param overrideEnd
 	 * @return
 	 * @throws IOException
 	 */
@@ -1074,7 +1073,10 @@ public class PluginFileMerger {
                 if (!isContinued) {
                     int index = trim.indexOf("=");
                     if (index > 0) {
-                        String propName = trim.substring(0, index);
+		    	String propName = trim.substring(0, index).trim();
+			if (propName.contains(" ")) {
+				propName = propName.replace(" ", "");
+			}
                         props.add(propName);
 
                         // Is the property value continued on the next line?
@@ -1107,7 +1109,7 @@ public class PluginFileMerger {
 			}
 			int index = trim.indexOf("=");
 			if ((!inPlugins) && index > 0
-					&& props.contains(trim.substring(0, index))) {
+					&& props.contains(trim.substring(0, index).trim())) {
 				buf.append(overrideBegin);
 				buf.append("\n");
 				buf.append(comment);
@@ -1461,7 +1463,7 @@ public class PluginFileMerger {
 				} else {
 					if (temp.contains(endComment)) {
 						logger.fatal(
-								"Source  has ending tag but lack start tag.");
+								"Source has ending tag but lack start tag.");
 					}
 				}
 				if (line.contains(targetCommentBegin)) {
