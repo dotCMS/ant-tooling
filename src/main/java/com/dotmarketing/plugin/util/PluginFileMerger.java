@@ -29,6 +29,8 @@ import java.util.zip.ZipInputStream;
 
 import com.dotcms.repackage.org.apache.logging.log4j.LogManager;
 import com.dotcms.repackage.org.apache.logging.log4j.Logger;
+import com.liferay.util.StringPool;
+
 import org.apache.tools.ant.BuildException;
 
 public class PluginFileMerger {
@@ -395,17 +397,17 @@ public class PluginFileMerger {
 				while (e != null && e.hasMoreElements()) {
 					JarEntry entry = e.nextElement();
 					if (entry != null && !entry.isDirectory()&& entry.getName().endsWith(".class")) {
-				       String path = entry.getName().substring(0, entry.getName().lastIndexOf("/"));
-				       String prefix = entry.getName().substring(entry.getName().lastIndexOf("/")+1,entry.getName().indexOf("."));
+				       String path = entry.getName().substring(0, entry.getName().lastIndexOf(StringPool.FORWARD_SLASH));
+				       String prefix = entry.getName().substring(entry.getName().lastIndexOf(StringPool.FORWARD_SLASH)+1,entry.getName().indexOf(StringPool.PERIOD));
 				       String fullPath = classDest + path;
 					   deleteFiles(fullPath,prefix,".class");
 					   //to delete empty directories.
-					   int size = path.split("/").length;
+					   int size = path.split(StringPool.FORWARD_SLASH).length;
 					   for(int j=size;j>0;j--){
 							File dir = new File(fullPath);
 							 if (dir.exists() && dir.listFiles().length == 0)
 							   dir.delete();
-							fullPath = fullPath.substring(0, fullPath.lastIndexOf("/"));
+							fullPath = fullPath.substring(0, fullPath.lastIndexOf(StringPool.FORWARD_SLASH));
 					   }
 			        }
 				}
@@ -414,14 +416,14 @@ public class PluginFileMerger {
 			deleteDirectory(new File(staticDest));
 			deleteDirectory(new File(velocityDest));
 			deleteDirectory(new File(jspDest));
-			deleteFiles(libDest,"pluginlib-"+name+"-",".jar");
+			deleteFiles(libDest,"pluginlib-" + name + StringPool.DASH, ".jar");
 
             //Look for any TinyMCE plugins
             String tinyMCEDest = rootPath + File.separator + "html" +
                     File.separator + "js" + File.separator + "tinymce" +
                     File.separator + "js" + File.separator + "tinymce" +
                     File.separator + "plugins" + File.separator;
-            final String prefix = "plugin_" + name + "_";
+            final String prefix = "plugin_" + name + StringPool.UNDERLINE;
             FileFilter filter = new FileFilter() {
 
                 public boolean accept ( File pathname ) {
@@ -733,11 +735,11 @@ public class PluginFileMerger {
 
 		String path = entry.getName();
 
-		String fileName=path.substring(path.lastIndexOf("/")+1);
+		String fileName=path.substring(path.lastIndexOf(StringPool.FORWARD_SLASH)+1);
 		if (stripParentDir) {
-			path = path.substring(path.indexOf("/"));
+			path = path.substring(path.indexOf(StringPool.FORWARD_SLASH));
 		}
-		path = path.substring(0, path.lastIndexOf("/"));
+		path = path.substring(0, path.lastIndexOf(StringPool.FORWARD_SLASH));
 		String	full=null;
 		if (prefixFile) {
 			full=path+File.separator+prefix+fileName;
@@ -798,11 +800,11 @@ public class PluginFileMerger {
 
 			String path = entry.getName();
 
-			String fileName=path.substring(path.lastIndexOf("/")+1);
+			String fileName=path.substring(path.lastIndexOf(StringPool.FORWARD_SLASH)+1);
 			if (stripParentDir) {
-				path = path.substring(path.indexOf("/"));
+				path = path.substring(path.indexOf(StringPool.FORWARD_SLASH));
 			}
-			path = path.substring(0, path.lastIndexOf("/"));
+			path = path.substring(0, path.lastIndexOf(StringPool.FORWARD_SLASH));
 			String	full=null;
 
 
@@ -1071,12 +1073,9 @@ public class PluginFileMerger {
 			String trim = line.trim();
 			if ((!trim.startsWith("#")) && trim.length() > 0) {
                 if (!isContinued) {
-                    int index = trim.indexOf("=");
+                    int index = trim.indexOf(StringPool.EQUAL);
                     if (index > 0) {
 		    	String propName = trim.substring(0, index).trim();
-			if (propName.contains(" ")) {
-				propName = propName.replace(" ", "");
-			}
                         props.add(propName);
 
                         // Is the property value continued on the next line?
@@ -1107,7 +1106,7 @@ public class PluginFileMerger {
 			if (trim.startsWith(endComment)) {
 				inPlugins = false;
 			}
-			int index = trim.indexOf("=");
+			int index = trim.indexOf(StringPool.EQUAL);
 			if ((!inPlugins) && index > 0
 					&& props.contains(trim.substring(0, index).trim())) {
 				buf.append(overrideBegin);

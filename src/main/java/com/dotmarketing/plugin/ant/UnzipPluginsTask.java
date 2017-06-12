@@ -57,7 +57,7 @@ public class UnzipPluginsTask  extends Task {
 	/**
 	 * Set the root of the web app (Servlet context)
 	 * 
-	 * @param root
+	 * @param rootPath
 	 *            The root of the web app
 	 */
 	public synchronized void setRootPath(String rootPath) {
