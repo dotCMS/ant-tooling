@@ -5,9 +5,6 @@ import com.dotmarketing.plugin.util.PluginRoot;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-import java.net.URL;
-
-
 /**
  * @author Andres Olarte
  * @since 1.6.5c
