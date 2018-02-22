@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    compile (group: 'com.dotcms', name: 'dotcms', version: '4.2.2'){
+    compile (group: 'com.dotcms', name: 'dotcms', version: '4.3.0'){
         transitive = true
     }
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
